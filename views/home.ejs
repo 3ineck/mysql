@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles/main.css" />
+
+    <!-- CSS DO BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <!-- BOOTSTRAP ÍCONES -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!--  -->
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5">Hands on Work VI</h1>
+      <h3>Acadêmicos: Alexandre Wronski Neto e Raphael Thiago Eineck</h3>
+      <a class="btn btn-primary my-3" href="/cadastrar-aluno" role="button"
+        >Cadastro Aluno</a
+      >
+      <a class="btn btn-primary my-3" href="/cadastrar-curso" role="button"
+        >Cadastro Curso</a
+      >
+      <a class="btn btn-primary my-3" href="/alocacao" role="button"
+        >Alocar Aluno</a
+      >
+    </div>
+
+    <div class="container">
+      <h4>Alunos:</h4>
+      <form action="/excluir" method="post">
+        <table class="table table-hover table-bordered align-middle">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">CPF</th>
+              <th scope="col">Data Nascimento</th>
+              <th scope="col">Sexo</th>
+              <th scope="col">e-mail</th>
+              <th scope="col">Excluir?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% alunos.forEach(aluno => { %>
+            <tr>
+              <td><%= aluno.nome ? aluno.nome : "" %></td>
+              <td><%= aluno.cpf ? aluno.cpf : "" %></td>
+              <td>
+                <%=aluno.dataNascimento.getDate() < 10 ? "0" +
+                aluno.dataNascimento.getDate() :
+                aluno.dataNascimento.getDate()%>/<%=(aluno.dataNascimento.getMonth()+1)
+                < 10 ? "0" + (aluno.dataNascimento.getMonth()+1) :
+                (aluno.dataNascimento.getMonth()+1)%>/<%=aluno.dataNascimento.getFullYear()%>
+              </td>
+              <td><%= aluno.sexo ? aluno.sexo : "" %></td>
+              <td><%= aluno.email ? aluno.email : "" %></td>
+              <td>
+                <button
+                  class="btn btn-primary btn-sm"
+                  data-toggle="tooltip"
+                  title="Excluir"
+                  name="excluir"
+                  value="<%= aluno.id %>"
+                >
+                  <i class="bi bi-x-circle"></i>
+                </button>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+    <div class="container">
+      <h4>Cursos:</h4>
+      <table class="table table-hover table-bordered align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Prazo</th>
+            <th scope="col">Situação</th>
+            <th scope="col">Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cursos.forEach(curso => { %>
+          <tr>
+            <td><%= curso.nome ? curso.nome : "" %></td>
+            <td><%= curso.prazo ? curso.prazo : "" %></td>
+            <td><%= curso.situacao == 1 ? "Ativo" : "Inativo" %></td>
+            <td><%= curso.descricao ? curso.descricao : "" %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container">
+      <h4>Alocação:</h4>
+      <table class="table table-hover table-bordered align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Curso</th>
+            <th scope="col">Prazo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% alocacoes.forEach(alocacao => { %>
+          <tr>
+            <td><%= alocacao.nomeAluno ? alocacao.nomeAluno : "" %></td>
+            <td><%= alocacao.cpf ? alocacao.cpf : "" %></td>
+            <td><%= alocacao.nomeCurso ? alocacao.nomeCurso : "" %></td>
+            <td><%= alocacao.prazo ? alocacao.prazo : "" %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+  <!-- JS DO BOOTSTRAP -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"
+  ></script>
+</html>
